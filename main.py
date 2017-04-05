@@ -1,14 +1,14 @@
-import fileRead 
-import User
-import numpy as np
+# import matplotlib.pyplot as plt
+import fileRead
 
 def main():
-	users = fileRead.read()
-	print('main')
-	#print(users)
-	print(users[0].id)
-	print(users[1].id)
-	print(users[2].id)	
+	destination, users = fileRead.read()
+	# print('main')
+	# print(users.T[0])
+	# a = np.histogram(users.T[0], bins=1)
+	print(users.shape)
+	# plt.hist(a, )
+	# plt.show()
 
 if __name__ == "__main__":
 	main()
