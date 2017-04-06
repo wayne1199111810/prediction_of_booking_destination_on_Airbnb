@@ -10,6 +10,7 @@ def read():
 		else:
 			return None, None
 	with open('Data/train_users_2.csv', 'r') as csvfile:
+		nIters = 10000	
 		reader = csv.DictReader(csvfile)		
 		users = np.matrix([])
 		destination = np.matrix([])
@@ -33,7 +34,7 @@ def read():
 		# 	else:
 		# 		count_other += 1
 			i += 1
-			if i >= 2500:
+			if i >= nIters:
 				break
 		return destination, users
 

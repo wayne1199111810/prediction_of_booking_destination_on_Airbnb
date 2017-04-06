@@ -214,24 +214,7 @@ class User:
 			return loyal
 
 		def getCountry(country_destination):
-			if country_destination == 'NDF':
-				return 0
-			elif country_destination == 'US':
-				return 1
-			elif country_destination == 'FR':
-				return 2
-			elif country_destination == 'IT':
-				return 3
-			elif country_destination == 'GB':
-				return 4
-			elif country_destination == 'ES':
-				return 5
-			elif country_destination == 'CA':
-				return 6
-			elif country_destination == 'other':
-				return 7
-			else:
-				return 8
+			return country_destination
 				
 		self.first_booking = getFirstBooking(first_booking)
 		self.gender = getGender(gender)
