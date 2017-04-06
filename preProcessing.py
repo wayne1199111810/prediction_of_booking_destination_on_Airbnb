@@ -32,7 +32,19 @@ def read():
 		# 		count_U += 1
 		# 	else:
 		# 		count_other += 1
-			# i += 1
-			# if i >= 50:
-			# 	break
+			i += 1
+			if i >= 2500:
+				break
 		return destination, users
+
+def writeToFile():
+	destination, users = read()
+	users.dump("users.dat")
+	destination.dump("destination.dat")
+	print('from write: ' + str(users.shape) + str(destination.shape))
+
+def readFromFile():
+	users = np.load("users.dat")
+	destination = np.load("destination.dat")
+	print('from read: ' + str(users.shape) + str(destination.shape))
+	return users, destination
