@@ -26,26 +26,19 @@ def read():
 			else:
 				users = np.concatenate((users, features), axis=0)
 				destination = np.concatenate((destination, label), axis=0)
-
-		# 	if label == 0:
-		# 		count_N += 1
-		# 	elif label == 2:
-		# 		count_U += 1
-		# 	else:
-		# 		count_other += 1
-			i += 1
-			if i >= nIters:
-				break
+			# i += 1
+			# if i >= nIters:
+			# 	break
 		return destination, users
 
 def writeToFile():
 	destination, users = read()
-	users.dump("users.dat")
-	destination.dump("destination.dat")
+	users.dump("Data/users.dat")
+	destination.dump("Data/destination.dat")
 	print('from write: ' + str(users.shape) + str(destination.shape))
 
 def readFromFile():
-	users = np.load("users.dat")
-	destination = np.load("destination.dat")
+	users = np.load("Data/users.dat")
+	destination = np.load("Data/destination.dat")
 	print('from read: ' + str(users.shape) + str(destination.shape))
 	return users, destination

@@ -50,12 +50,14 @@ class User:
 			return age
 
 		def getSignUpMethod(data):
-			segment = 2
+			segment = 3
 			sign_up_method = matlab.zeros((1, segment)).astype(int)
 			if data == 'facebook':
 				sign_up_method[0, 0] = 1
 			elif data == 'basic':
 				sign_up_method[0, 1] = 1
+			elif data == 'google':
+				sign_up_method[0, 2] = 1
 			else:
 				print('sign up: ' + data)
 			return sign_up_method
