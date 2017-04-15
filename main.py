@@ -10,7 +10,6 @@ if __name__ == "__main__":
 
 	k = 8
 	data = cv.CV(k)
-	X_train, Y_train, X_valid, Y_valid = data.iteration(1)
 
 	print(X_valid)
 
