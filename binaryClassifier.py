@@ -28,27 +28,6 @@ class binaryClassifier:
 
 
 	def train(self, cv, k):
-		# logistic regression
-		# lg_trainers = lg.logisticRegression_binary()
-		# lg_trainers.train(cv, k)
-		# self.lg_trainer = lg_trainers.getTrainer()
-		
-		# # polynomial regression
-		# #pl_trainers = pl.polyRegression_binary()
-		# #pl_trainers.train(cv,k,3)
-		# #self.pl_trainer = pl_trainers.getTrainer()
-		
-		# # SVM
-		# svm_trainers = svm.svmTrainers_binary()
-		# svm_trainers.train(cv,k)
-		# self.svm_trainer = svm_trainers.getTrainer()
-		
-		# # NB
-		# nb_trainers = nb.NBTrainers_binary()
-		# nb_trainers.train(cv,k)
-		# self.nb_trainer = nb_trainers.getTrainer()
-
-
 		score = 0
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)

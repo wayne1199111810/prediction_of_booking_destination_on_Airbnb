@@ -33,11 +33,12 @@ def read():
 			# 	break
 		return destination, users
 
-def writeToFile():
-	destination, users = read()
-	users.dump("Data/users.dat")
-	destination.dump("Data/destination.dat")
-	print('from write: ' + str(users.shape) + str(destination.shape))
+def writeToFile(instance, label, user_filename, destination_filename, cvs = False):
+	if cvs:
+		instance, users = read()
+	instance.dump(user_filename)
+	label.dump(destination_filename)
+	print('from write: ' + str(label.shape) + str(instance.shape))
 
 def readFromFile(x_train, y_train):
 	users = np.load(x_train)
