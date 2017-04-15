@@ -12,7 +12,10 @@ Y_train = ['apple','apple','orange','orange']
 model.fit(X_train, Y_train)
 
 # Predict
-X_test = [[1,0]]
+X_test = [[1,0],[2,2]]
 result = model.predict(X_test)
+prob = model.predict_proba(X_test)
 
 print(result)
+print(prob)
+print(model.classes_)
