@@ -5,10 +5,10 @@ from utility import *
 
 if __name__ == "__main__":
 
-	# size_of_training = 5000;
+	# size_of_training = 1000;
 	# createNewTrainingFileWithSize(size_of_training)
 
-	k = 3
+	k = 8
 	data = cv.CV(k)
 	X_train, Y_train, X_valid, Y_valid = data.iteration(1)
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
 	# check
 
-	score = binaryEvaluation(result, convertUStoBinary(Y_valid))
+	score = binaryEvaluation(result, pp.convertUStoBinary(Y_valid))
 
 	print(score)
 

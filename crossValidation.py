@@ -1,15 +1,14 @@
 import numpy as np
 import preProcessing as pp
 
-x_train = "Data/users.dat"
-y_train = "Data/destination.dat"
+x_train = "Data/users_1000.dat"
+y_train = "Data/destination_1000.dat"
 
 class CV:
 	def __init__(self, k, instance = None, label = None):
 		self.k = k
 		if instance is None and label is None:
-			self.instance, self.label = pp.readFromFile(x_train, y_train)
-			self.idx = np.random.permutation(self.label.shape[0])
+			self.readFromFile(x_train, y_train)
 		else:
 			self.instance, self.label = instance, label
 			self.idx = np.random.permutation(self.label.shape[0])
@@ -32,3 +31,7 @@ class CV:
 		X_train = self.instance[idx_train]
 
 		return X_train, Y_train, X_valid, Y_valid
+
+	def readFromFile(self, instance_file, label_file):
+		self.instance, self.label = pp.readFromFile(instance_file, label_file)
+		self.idx = np.random.permutation(self.label.shape[0])

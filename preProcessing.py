@@ -45,3 +45,13 @@ def readFromFile(x_train, y_train):
 	destination = np.load(y_train)
 	print('from ' + x_train + ' size: ' + str(users.shape) +  ', ' + y_train + ' size: ' + str(destination.shape))
 	return users, destination
+
+def convertUStoBinary(country):
+	num = len(country)
+	res = np.zeros((num, 1))
+	for i in range(num):
+		if country[i] == 'US':
+			res[i] = 1
+		else:
+			res[i] = 0
+	return res

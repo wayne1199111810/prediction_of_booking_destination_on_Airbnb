@@ -8,11 +8,10 @@ class logisticRegression_binary:
 		self.score = []
 		self.trainers = []
 
-	def train(self, instance, label, k):
-		cv = crossValidation.CV(k, instance, np.ravel(convertUStoBinary(label)))
+	def train(self, instance, label, k, regulation_strength = 1e5):
+		cv = crossValidation.CV(k, instance, label)
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
-			regulation_strength = 10**i
 			trainer = linear_model.LogisticRegression(C=regulation_strength)
 			trainer.fit(X_train, Y_train)
 			result = trainer.predict(X_valid)
