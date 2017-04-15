@@ -1,16 +1,30 @@
 import numpy as np
-import logisticRegression_multi as lg 
+import crossValidation as cv
+import logisticRegression_multiclass as lg 
+import svmTrainers_multiclass as svm_m
+import logisticRegression_multiclass as log_m
+import binary_trainer as bt
+import math
+from utility import *
 
-trainer = lg.logisticRegression_multi()
+if __name__ == "__main__":
 
-prob = [[0.89, 0.53, 0.14, 0.67, 0.15, 0.45, 0.97], [0.55, 0.14, 0.67, 0.85, 0.91, 0.20, 0.36]]
-prob = np.array(prob)
-classes = ['US', 'TW', 'JP', 'FR', 'IT', 'ER', 'GE']
+	b_trainer = bt.binary_trainer()
+
+	k = 3
+	data = cv.CV(k)
+	X_train, Y_train, X_valid, Y_valid = data.iteration(1)
+
+	b_trainer.train(X_valid, Y_valid, k)
+
+	res = b_trainer.predict(X_valid)
 
 
-result = trainer.getTopProb(prob, classes)
+	print(res)
 
 
-print(result)
+
+
+
 
 

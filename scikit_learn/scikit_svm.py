@@ -13,9 +13,9 @@ Y_train = ['apple','apple','orange','orange']
 model.fit(X_train,Y_train)
 
 # predict
-X_test = [[1,0]]
+X_test = [[1,0],[2,0]]
 result = model.predict(X_test)
-prob = model.predict_proba(X_test)[0]
+prob = model.predict_proba(X_test)
 
 print(result)
 print(prob)

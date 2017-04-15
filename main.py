@@ -12,6 +12,10 @@ if __name__ == "__main__":
 	data = cv.CV(k)
 	X_train, Y_train, X_valid, Y_valid = data.iteration(1)
 
+	print(X_valid)
+
+	'''
+
 	b_classifier = bc.binaryClassifier()
 	b_classifier.train(data,k)
 	result = b_classifier.predict(X_valid)
@@ -26,3 +30,4 @@ if __name__ == "__main__":
 	#print(len(Y_test))
 	# print(len(X_train))
 	# print(len(Y_train))
+	'''
