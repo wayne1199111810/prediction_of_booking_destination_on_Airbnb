@@ -3,6 +3,7 @@ from utility import *
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
+import crossValidation
 
 class polyRegression_binary:
 	def __init__(self):
@@ -28,12 +29,10 @@ class polyRegression_binary:
 		return res
 
 
-	def train(self,data,k,degree):
-
+	def train(self, instance, label, k, degree):
+		cv = crossValidation.CV(k, instance, np.ravel(convertUStoBinary(label)))
 		for i in range(k):
-			X_train, Y_train, X_test, Y_test = data.iteration(i)
-			Y_train = self.convertUStoBinary(Y_train)
-			Y_test = self.convertUStoBinary(Y_test)
+			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
 
 			trainer = make_pipeline(PolynomialFeatures(degree), Ridge())
 			trainer.fit(X_train, Y_train)
@@ -50,9 +49,7 @@ class polyRegression_binary:
 		return trainer
 
 	def text(data):
-		trainer = self.getTrainer()
-		result = trainer.predict(data)
-		return result
+		return self.getTrainer().predict(data)
 
 
 

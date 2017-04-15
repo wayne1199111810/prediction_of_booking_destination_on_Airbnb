@@ -43,5 +43,5 @@ def writeToFile(instance, label, user_filename, destination_filename, cvs = Fals
 def readFromFile(x_train, y_train):
 	users = np.load(x_train)
 	destination = np.load(y_train)
-	print('from read: ' + str(users.shape) + str(destination.shape))
+	print('from ' + x_train + ' size: ' + str(users.shape) +  ', ' + y_train + ' size: ' + str(destination.shape))
 	return users, destination

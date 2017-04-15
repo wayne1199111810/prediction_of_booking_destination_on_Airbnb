@@ -2,8 +2,7 @@ import numpy as np
 import preProcessing as pp
 
 def binaryEvaluation(result, Y_test):
-	print(result.shape)
-	print(Y_test.shape)
+	# print(str(result.shape) + ', ' + str(Y_test.shape))
 	assert result.shape == Y_test.shape
 	num = len(result)
 	score = 0
@@ -11,8 +10,6 @@ def binaryEvaluation(result, Y_test):
 		if result[i] == Y_test[i]:
 			score = score + 1
 	return score / num
-
-#def multiEvaluation(result, Y_test):
 
 def convertUStoBinary(country):
 	num = len(country)
@@ -24,6 +21,8 @@ def convertUStoBinary(country):
 			res[i] = 0
 	return res
 
+# Create a new file with the first size_of_training
+# data in training data
 def createNewTrainingFileWithSize(size_of_training):
 	train_user = 'Data/users_train.dat'
 	train_destination = 'Data/destination_train.dat'

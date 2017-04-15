@@ -32,6 +32,8 @@ class binaryClassifier:
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
 
+			Y_valid = convertUStoBinary(Y_valid)
+
 			lg_trainers = lg.logisticRegression_binary()
 			lg_trainers.train(X_train, Y_train, k)
 
@@ -46,11 +48,14 @@ class binaryClassifier:
 			res_nb = nb_trainers.getTrainer().predict(X_valid)
 			result = self.vote(res_lg, res_svm, res_nb)
 
-			if binaryEvaluation(result, convertUStoBinary(Y_valid)) > score:
-				score = binaryEvaluation(result, convertUStoBinary(Y_valid))
+			accuracy = binaryEvaluation(np.ravel(result), np.ravel(Y_valid))
+
+			if accuracy > score:
+				score = accuracy
 				self.lg_trainer = lg_trainers.getTrainer()
 				self.svm_trainer = svm_trainers.getTrainer()
 				self.nb_trainer = nb_trainers.getTrainer()
+			print(' Iteration ' + str(i) + ' accuracy:' + str(accuracy))
 
 	def predict(self, instance):
 		res_lg = self.lg_trainer.predict(instance)
