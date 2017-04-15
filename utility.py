@@ -57,5 +57,9 @@ def extractNonUs(data, label):
 			label_new = np.vstack((label_new, label[i]))
 	return data_new, label_new
 
-
+def subSampleFromBagging(instance, label, ratio=1.0):
+	mu, sigma, number_of_instance = 0.5, 0.15, instance.shape[0]
+	bag_size = int(round(0.2 + 0.8 * (np.random.normal(mu, sigma, 1) * number_of_instance)[0]))
+	ran_idx = np.random.randint(number_of_instance, size = bag_size)
+	return instance[ran_idx], label[ran_idx]
 

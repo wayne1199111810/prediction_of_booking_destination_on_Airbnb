@@ -10,36 +10,27 @@ class polyRegression_binary:
 		self.score = []
 		self.trainers = []
 
-	def convertUStoBinary(self,country):
-		num = len(country)
-		res = np.zeros((num,1))
-		for i in range(num):
-			if country[i]=='US':
-				res[i] = 1
-			else:
-				res[i] = 0
-		return res
-
-	def decideLabel(self,result):
+	def decideLabel(self, result):
 		num = len(result)
-		res = np.zeros((num,1))
+		res = np.zeros((num))
 		for i in range(num):
-			if result[i]>=0.5:
+			if result[i] >= 0.5:
 				res[i] = 1
-		return res
+		return np.reshape(res, (res.shape[0],))
 
 
-	def train(self, instance, label, k, degree):
-		cv = crossValidation.CV(k, instance, np.ravel(convertUStoBinary(label)))
+	def train(self, instance, label, k ,degree = 2):
+		cv = crossValidation.CV(k, instance, label)
 		for i in range(k):
+			degree = i
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
 
 			trainer = make_pipeline(PolynomialFeatures(degree), Ridge())
 			trainer.fit(X_train, Y_train)
-			result = trainer.predict(X_test)
+			result = trainer.predict(X_valid)
 			result = self.decideLabel(result)
 
-			score = binaryEvaluation(result, Y_test)
+			score = binaryEvaluation(result, Y_valid)
 
 			self.score.append(score)
 			self.trainers.append(trainer)
@@ -48,11 +39,5 @@ class polyRegression_binary:
 		trainer = self.trainers[ self.score.index(max(self.score)) ]	# get the trainer with highest score
 		return trainer
 
-	def text(data):
+	def predict(self, instance):
 		return self.getTrainer().predict(data)
-
-
-
-
-
-
