@@ -2,7 +2,7 @@ import User as U
 import numpy as np
 import csv
 
-raw_data = 'Data/train_users_2.csv'
+raw_data = 'Data/rawdata/train_users_2.csv'
 
 def read():
 	def getUserInfo(row):
