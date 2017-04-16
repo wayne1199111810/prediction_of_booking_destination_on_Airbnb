@@ -6,12 +6,11 @@ y_train = "Data/destination_1000.dat"
 
 class CV:
 	def __init__(self, k, instance = None, label = None):
-		self.k = k
 		if instance is None and label is None:
 			self.readFromFile(x_train, y_train)
 		else:
 			self.instance, self.label = instance, label
-			self.idx = np.random.permutation(self.label.shape[0])
+		self.setK(k)
 			
 	def iteration(self, nIters):
 		assert(nIters >= 0 and nIters < self.k)
@@ -32,6 +31,9 @@ class CV:
 
 		return X_train, Y_train, X_valid, Y_valid
 
+	def setK(self, k):
+		self.k = k
+		self.idx = np.random.permutation(self.label.shape[0])
+
 	def readFromFile(self, instance_file, label_file):
 		self.instance, self.label = pp.readFromFile(instance_file, label_file)
-		self.idx = np.random.permutation(self.label.shape[0])
