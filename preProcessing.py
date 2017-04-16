@@ -4,7 +4,7 @@ import csv
 
 raw_data = 'Data/rawdata/train_users_2.csv'
 
-def read():
+def readRawData():
 	def getUserInfo(row):
 		u = U.User(row['id'], row['date_account_created'], row['timestamp_first_active'], row['date_first_booking'], row['gender'], row['age'], row['signup_method'], row['signup_flow'], row['language'], row['affiliate_channel'], row['affiliate_provider'], row['first_affiliate_tracked'], row['signup_app'], row['first_device_type'], row['first_browser'], row['country_destination'])
 		if u.first_booking:
@@ -35,7 +35,7 @@ def read():
 
 def writeToFile(instance, label, user_filename, destination_filename, cvs = False):
 	if cvs:
-		instance, users = read()
+		instance, users = readRawData()
 	instance.dump(user_filename)
 	label.dump(destination_filename)
 	print('from write: ' + str(label.shape) + str(instance.shape))

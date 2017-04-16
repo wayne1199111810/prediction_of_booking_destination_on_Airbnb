@@ -7,18 +7,22 @@ if __name__ == "__main__":
 
 	# size_of_training = 1000;
 	# createNewTrainingFileWithSize(size_of_training)
+	
+	destination, users = pp.readRawData() 
+	pp.writeToFile(users, destination, 'Data/user.dat', 'Data/destination.dat', cvs = False)
 
-	k = 8
+
+	k = 3
 	data = cv.CV(k)
+	X_train, Y_train, X_valid, Y_valid = data.iteration(2)
+	# print(X_valid)
 
-	print(X_valid)
 
-	'''
-
-	b_classifier = bc.binaryClassifier()
+	bag_size = 21
+	b_classifier = bc.binaryClassifier(bag_size)
 	b_classifier.train(data,k)
 	result = b_classifier.predict(X_valid)
-
+	
 	# check
 
 	score = binaryEvaluation(result, pp.convertUStoBinary(Y_valid))
@@ -29,4 +33,3 @@ if __name__ == "__main__":
 	#print(len(Y_test))
 	# print(len(X_train))
 	# print(len(Y_train))
-	'''

@@ -11,7 +11,8 @@ from sklearn.naive_bayes import GaussianNB
 
 from utility import *
 
-class binary_trainer:
+# TODO reassign constructor
+class BinaryTrainer:
 	def __init__(self):
 		self.lg_trainer = linear_model.LogisticRegression()
 		self.svm_trainer = svm.SVC(probability=True)
@@ -22,7 +23,7 @@ class binary_trainer:
 		result = np.zeros((num,1))
 		for i in range(num):
 			if res1[i]+res2[i]+res3[i]>=2:
-				result[i] = 1
+				result[i, 0] = 1
 		return result
 
 	def train(self, instance, label, k):

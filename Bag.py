@@ -1,26 +1,28 @@
 from utility import *
+import binary_trainer as bt
 
 class Bag:
 	def bagOfBinaryTrainers(X_train, Y_train, bag_size, k):
 		trainers = []
 		for j in range(bag_size):
 			x, y = Bag.subBag(X_train, Y_train)
-			trainer = BinaryTrainer()
-			trainer.train(x, y)
+			trainer = bt.BinaryTrainer()
+			trainer.train(x, y, k)
 			result = trainer.predict(x)
-			accuracy = binaryEvaluation(np.ravel(result), np.ravel(Y_valid))
+			accuracy = binaryEvaluation(np.ravel(result), np.ravel(y))
 			if accuracy > 0.5:
-				trainers.append(binaryClassifier.Trainer(res_lg, res_svm, res_nb))
+				trainers.append(trainer)
 		return trainers
 
 	def predictFromBinaryTrainers(x, trainers):
 		num_of_instance = x.shape[0]
 		set_of_result = np.zeros((num_of_instance, len(trainers)))
 		for i in range(len(trainers)):
-			res_lg = trainers[i].lg_trainer.predict(x)
-			res_svm = trainers[i].svm_trainer.predict(x)
-			res_nb = trainers[i].nb_trainer.predict(x)
-			result_of_one_trainers = Bag.binaryVote(res_lg, res_svm, res_nb)
+			# res_lg = trainers[i].lg_trainer.predict(x)
+			# res_svm = trainers[i].svm_trainer.predict(x)
+			# res_nb = trainers[i].nb_trainer.predict(x)
+			# result_of_one_trainers = Bag.binaryVote(res_lg, res_svm, res_nb)
+			result_of_one_trainers = trainers[i].predict(x)
 			set_of_result[:, i] = result_of_one_trainers.T
 		result = Bag.voteFromBinaryTrainers(set_of_result)
 		return result

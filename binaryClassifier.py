@@ -30,16 +30,16 @@ class binaryClassifier:
 			bTrainers = Bag.bagOfBinaryTrainers(X_train, Y_train, self.bag_size, k)
 			result = Bag.predictFromBinaryTrainers(X_valid, bTrainers)
 			self.trainers.append(bTrainers)
-			self.score = append(binaryEvaluation(result, Y_valid))
-
-			print(' Iteration ' + str(i) + ' accuracy:' + str(accuracy))
+			score = binaryEvaluation(np.ravel(result), Y_valid)
+			self.score.append(score)
+			print(' Iteration ' + str(i) + ' accuracy:' + str(score))
 
 	def getTrainer(self):
 		bTrainer = self.trainers[self.score.index(max(self.score))]
 		return bTrainer
 
 	def predict(self, instance):
-		result = Bag.predictFromTrainers(instance, self.getTrainer())
+		result = Bag.predictFromBinaryTrainers(instance, self.getTrainer())
 		return result
 
 	# def vote(self, res1, res2, res3):
