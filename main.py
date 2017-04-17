@@ -1,7 +1,7 @@
 # import matplotlib.pyplot as plt
-import crossValidation as cv
-import binaryClassifier as bc
-from utility import *
+import include.crossValidation as cv
+import include.binary.binaryClassifier as bc
+from include.utility import *
 
 if __name__ == "__main__":
 
