@@ -55,3 +55,26 @@ def extractNonUs(data, label):
 			data_new = np.vstack((data_new, data[i]))
 			label_new = np.vstack((label_new, label[i]))
 	return data_new, label_new
+
+def downSample(data, label, dominant):
+	dimension = len(data[0].tolist()[0])
+	idx_dm = np.where(label == dominant)[0]
+	idx_ud = np.where(label != dominant)[0]
+
+	data_dm = np.zeros((len(idx_dm), dimension))
+	data_ud = np.zeros((len(idx_ud), dimension))
+	label_dm = np.ones((len(idx_dm),1))
+	label_ud = np.zeros((len(idx_ud),1))
+
+	for i in range(len(idx_dm)):
+		data_dm[i] = data[idx_dm[i]]
+
+	for i in range(len(idx_ud)):
+		data_ud[i] = data[idx_ud[i]]
+
+	return data_dm, label_dm, data_ud, label_ud
+
+
+
+
+

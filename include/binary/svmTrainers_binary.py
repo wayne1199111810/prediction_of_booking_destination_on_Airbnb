@@ -16,7 +16,7 @@ class svmTrainers_binary:
 			trainer = svm.SVC(probability=True)
 			trainer.fit(X_train, Y_train)
 			result = trainer.predict(X_valid)
-
+			print(result)
 			score = binaryEvaluation(result, Y_valid)
 
 			self.score.append(score)
@@ -27,7 +27,18 @@ class svmTrainers_binary:
 		return trainer
 
 	def predict(instance):
-		return self.getTrainer().predict(instance)
+		k = len(trainers)
+		num = len(instance)
+		res = np.zeros((num,1))
+		for i in range(k):
+			res = res + self.trainers[i].predict(instance) 
+		for i in range(num):
+			if res[i] >= k/2:
+				res[i] = 1
+			else:
+				res[i] = 0
+		return res
+		#return self.getTrainer().predict(instance)
 
 
 

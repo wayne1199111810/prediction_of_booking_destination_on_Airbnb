@@ -25,5 +25,16 @@ class logisticRegression_binary:
 		return trainer
 
 	def predict(self, instance):
-		return self.getTrainer().predict(instance)
+		k = len(trainers)
+		num = len(instance)
+		res = np.zeros((num,1))
+		for i in range(k):
+			res = res + self.trainers[i].predict(instance) 
+		for i in range(num):
+			if res[i] >= k/2:
+				res[i] = 1
+			else:
+				res[i] = 0
+		return res
+		#return self.getTrainer().predict(instance)
 
