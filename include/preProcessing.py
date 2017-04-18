@@ -1,4 +1,4 @@
-import User as U
+import include.User as U
 import numpy as np
 import csv
 
@@ -12,7 +12,7 @@ def readRawData():
 		else:
 			return None, None
 	with open(raw_data, 'r') as csvfile:
-		nIters = 10000	
+		nIters = 100
 		reader = csv.DictReader(csvfile)		
 		users = np.matrix([])
 		destination = np.matrix([])
@@ -28,9 +28,9 @@ def readRawData():
 			else:
 				users = np.concatenate((users, features), axis=0)
 				destination = np.concatenate((destination, label), axis=0)
-			# i += 1
-			# if i >= nIters:
-			# 	break
+			i += 1
+			#if i >= nIters:
+			#	break
 		return destination, users
 
 def writeToFile(instance, label, user_filename, destination_filename, cvs = False):

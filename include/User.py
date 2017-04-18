@@ -15,6 +15,50 @@ class User:
 			else:
 				return True
 
+		def getTimestamp(data):
+			segment = 6 + 6 + 6	# year, month, hour
+			timestamp = matlab.zeros((1, segment)).astype(int)
+			year = int(data[0:4])
+			month = int(data[4:6])
+			hour = int(data[8:10])
+			if year == 2009:
+				timestamp[0, 0] = 1
+			elif year == 2010:
+				timestamp[0, 1] = 1
+			elif year == 2011:
+				timestamp[0, 2] = 1
+			elif year == 2012:
+				timestamp[0, 3] = 1
+			elif year == 2013:
+				timestamp[0, 4] = 1
+			elif year == 2014:
+				timestamp[0, 5] = 1
+			if month == 1 or month == 2:
+				timestamp[0, 6] = 1
+			elif month == 3 or month == 4:
+				timestamp[0, 7] = 1
+			elif month == 5 or month == 6:
+				timestamp[0, 8] = 1
+			elif month == 7 or month == 8:
+				timestamp[0, 9] = 1
+			elif month == 9 or month == 10:
+				timestamp[0, 10] = 1
+			elif month == 11 or month == 12:
+				timestamp[0, 11] = 1
+			if hour >= 0 or hour < 4:
+				timestamp[0, 12] = 1
+			elif hour >= 4 or hour < 8:
+				timestamp[0, 13] = 1
+			elif hour >= 8 or hour < 12:
+				timestamp[0, 14] = 1
+			elif hour >= 12 or hour < 16:
+				timestamp[0, 15] = 1
+			elif hour >= 16 or hour < 20:
+				timestamp[0, 16] = 1
+			elif hour >= 20 or hour <= 24:
+				timestamp[0, 17] = 1
+			return timestamp
+
 		def getGender(data):
 			segment = 4
 			gender = matlab.zeros((1, segment)).astype(int)
@@ -35,6 +79,7 @@ class User:
 			for i in range(len(ageSection)):
 				if data < ageSection[i]:
 					return i - 1
+
 		def getAge(data):
 			if data != '':
 				data = getAgeSection(int(float(data)))
@@ -220,6 +265,7 @@ class User:
 				
 		self.first_booking = getFirstBooking(first_booking)
 		self.gender = getGender(gender)
+		#self.timestamp = getTimestamp(first_active)
 		self.age = getAge(age)
 		self.sign_up_method = getSignUpMethod(sign_up_method)
 		self.signup_flow = getFLow(signup_flow)
@@ -227,12 +273,13 @@ class User:
 		self.affiliate_channel = getChannel(affiliate_channel)
 		self.affiliate_provider = getProvider(affiliate_provider)
 		self.first_affiliate_tracked = getrack(first_affiliate_tracked)
-		self.loyal = getAppleLoyal(signup_app, first_device_type, first_browser)
+		#self.loyal = getAppleLoyal(signup_app, first_device_type, first_browser)
 		self.country_destination = getCountry(country_destination)
 
 
 	def getData(self):
 		feature = self.gender
+		#feature = np.concatenate((feature, self.timestamp), axis=1)
 		feature = np.concatenate((feature, self.age), axis=1)
 		feature = np.concatenate((feature, self.sign_up_method), axis=1)
 		feature = np.concatenate((feature, self.signup_flow), axis=1)
@@ -240,7 +287,7 @@ class User:
 		feature = np.concatenate((feature, self.affiliate_channel), axis=1)
 		feature = np.concatenate((feature, self.affiliate_provider), axis=1)
 		feature = np.concatenate((feature, self.first_affiliate_tracked), axis=1)
-		feature = np.concatenate((feature, self.loyal), axis=1)
+		#feature = np.concatenate((feature, self.loyal), axis=1)
 		label =  np.matrix([self.country_destination])
 		return label, feature
 
