@@ -56,23 +56,48 @@ def extractNonUs(data, label):
 			label_new = np.vstack((label_new, label[i]))
 	return data_new, label_new
 
-def downSample(data, label, dominant):
+def downSampling(data, label):
 	dimension = len(data[0].tolist()[0])
-	idx_dm = np.where(label == dominant)[0]
-	idx_ud = np.where(label != dominant)[0]
+	idx_dm = np.where(label == 1)[0].tolist()
+	idx_ud = np.where(label == 0)[0].tolist()
 
-	data_dm = np.zeros((len(idx_dm), dimension))
-	data_ud = np.zeros((len(idx_ud), dimension))
-	label_dm = np.ones((len(idx_dm),1))
-	label_ud = np.zeros((len(idx_ud),1))
+	random.shuffle(idx_dm)
+	random.shuffle(idx_ud)
 
-	for i in range(len(idx_dm)):
-		data_dm[i] = data[idx_dm[i]]
+	idx_res = idx_dm[:len(idx_ud)]+idx_ud
+	random.shuffle(idx_res)
 
-	for i in range(len(idx_ud)):
-		data_ud[i] = data[idx_ud[i]]
+	new_data = np.zeros((len(idx_res), dimension))
+	new_label = np.zeros((len(idx_res),1))
 
-	return data_dm, label_dm, data_ud, label_ud
+	for i in range(len(idx_res)):
+		new_data[i] = data[idx_res[i]]
+		new_label[i] = label[idx_res[i]]
+
+	return new_data, new_label
+
+def upSampling(data, label):
+	dimension = len(data[0].tolist()[0])
+	idx_dm = np.where(label == 1)[0].tolist()
+	idx_ud = np.where(label == 0)[0].tolist()
+
+	random.shuffle(idx_dm)
+	random.shuffle(idx_ud)
+
+	d = len(idx_dm)-len(idx_ud)
+	idx_res = idx_dm + idx_ud
+	random.shuffle(idx_ud)
+	idx_res = idx_res + idx_ud[:d]
+	random.shuffle(idx_res)
+
+	new_data = np.zeros((len(idx_res), dimension))
+	new_label = np.zeros((len(idx_res),1))
+
+	for i in range(len(idx_res)):
+		new_data[i] = data[idx_res[i]]
+		new_label[i] = label[idx_res[i]]
+
+	return new_data, new_label
 
 
 
