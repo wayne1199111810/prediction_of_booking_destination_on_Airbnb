@@ -29,7 +29,7 @@ if __name__ == "__main__":
 	Y_train = np.ravel(pp.convertUStoBinary(Y_train))
 	Y_valid = np.ravel(pp.convertUStoBinary(Y_valid))
 
-	bag_size = 21
+	bag_size = 11
 	b_classifier = bc.binaryClassifier(bag_size)
 	b_classifier.train(train_data)
 	result = b_classifier.predict(X_valid)
