@@ -1,7 +1,7 @@
 import numpy as np
-from utility import *
+from include.utility import *
 from sklearn import svm
-import crossValidation
+from include import crossValidation
 
 class svmTrainers_multiclass:
 	def __init__(self):

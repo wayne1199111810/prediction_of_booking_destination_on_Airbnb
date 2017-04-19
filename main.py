@@ -2,9 +2,6 @@
 import include.crossValidation as cv
 import include.binary.binaryClassifier as bc
 from include.utility import *
-from include import crossValidation
-
-
 from sklearn import linear_model
 from sklearn import svm
 from sklearn.ensemble import GradientBoostingClassifier
