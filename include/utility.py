@@ -1,5 +1,6 @@
 import numpy as np
 import include.preProcessing as pp
+import random
 import math
 
 def binaryEvaluation(result, Y_test):

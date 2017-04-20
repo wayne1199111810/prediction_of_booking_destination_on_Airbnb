@@ -1,8 +1,8 @@
 import numpy as np
 import include.preProcessing as pp
 
-x_train = "Data/users_1000.dat"
-y_train = "Data/destination_1000.dat"
+x_train = "Data/users_5000.dat"
+y_train = "Data/destination_5000.dat"
 
 class CV:
 	def __init__(self, k, instance = None, label = None):
