@@ -35,14 +35,6 @@ class Bag:
 		result = Bag.voteFromBinaryTrainers(set_of_result)
 		return result
 
-	def binaryVote(res1, res2, res3):
-		num = len(res1)
-		result = np.zeros((num,1))
-		for i in range(num):
-			if res1[i] + res2[i] + res3[i] >= 2:
-				result[i, 0] = 1
-		return result
-
 	def voteFromBinaryTrainers(set_of_result):
 		num_of_sample = set_of_result.shape[0]
 		result = np.zeros((num_of_sample, 1))
@@ -67,10 +59,24 @@ class Bag:
 		return trainers
 
 	def predictFromMultiTrainers(x, trainers):
-		num_of_instance = x.shape[0]
-		set_of_result = np.zeros((num_of_instance, len(trainers)))
-		for i in range(len(trainers)):
-			result_of_one_trainers = trainers[i].predict(x)
-			set_of_result[:, i] = result_of_one_trainers.T
-		result = Bag.voteFromBinaryTrainers(set_of_result)
+		num_of_instance = len(x)
+		k = 5
+		result = np.empty([num_of_instance,k], dtype=object)
+		res_list = []
+		for trainer in trainers:
+			res_list.append(trainer.predict(x))
+
+		for i in range(num_of_instance):
+			country_score = {}
+			for result in res_list:
+				for j in range(k):
+					if result[i][j] in country_score:
+						country_score[result[i][j]] = country_score[result[i][j]] + 1/(math.log(j+2,2))
+					else:
+						country_score[result[i][j]] = 1/(math.log(j+2,2))
+			for j in range(k):
+				result[i][j] = max(country_score, key=country_score.get)
+				country_score[result[i][j]] = 0
 		return result
+
+

@@ -16,7 +16,6 @@ class svmTrainers_binary:
 			trainer = svm.SVC(probability=True)
 			trainer.fit(X_train, Y_train)
 			result = trainer.predict(X_valid)
-			print(result)
 			score = binaryEvaluation(result, Y_valid)
 
 			self.score.append(score)

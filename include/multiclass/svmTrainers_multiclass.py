@@ -2,6 +2,7 @@ import numpy as np
 from include.utility import *
 from sklearn import svm
 from include import crossValidation
+from include.multiclass.countries import *
 
 class svmTrainers_multiclass:
 	def __init__(self):
@@ -24,6 +25,9 @@ class svmTrainers_multiclass:
 		cv = crossValidation.CV(k, instance, label)
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
+
+			X_train = np.concatenate((X_train, countries), axis=0)
+			Y_train = np.concatenate((Y_train, labels), axis=0)
 
 			trainer = svm.SVC(probability=True)
 			trainer.fit(X_train, Y_train)

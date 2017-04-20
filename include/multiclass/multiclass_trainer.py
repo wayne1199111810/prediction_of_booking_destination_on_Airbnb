@@ -1,7 +1,6 @@
 import numpy as np
-from include import crossValidation as cv
-from include.multiclass import svmTrainers_multiclass as svm_m
-from include.multiclass import logisticRegression_multiclass as log_m
+import include.multiclass.svmTrainers_multiclass as svm_m
+import include.multiclass.logisticRegression_multiclass as log_m
 import math
 from sklearn import linear_model
 from sklearn import svm
