@@ -1,7 +1,8 @@
 import numpy as np
-from utility import *
+from include.utility import *
 from sklearn import linear_model
-import crossValidation
+from include import crossValidation
+from include.multiclass.countries import *
 
 class logisticRegression_multiclass:
 	def __init__(self):
@@ -24,12 +25,15 @@ class logisticRegression_multiclass:
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
 
+			X_train = np.concatenate((X_train, countries), axis=0)
+			Y_train = np.concatenate((Y_train, labels), axis=0)
+
 			trainer = linear_model.LogisticRegression(C=1e5)
+
 			trainer.fit(X_train, Y_train)
 
 			prob = trainer.predict_proba(X_valid)
 			result = self.getTopProbResult(prob, trainer.classes_)
-
 			score = multiclassEvaluation(result, Y_valid)
 
 			self.score.append(score)
