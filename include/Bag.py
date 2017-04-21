@@ -8,7 +8,9 @@ class Bag:
 	# data set
 	def subBag(instance, label, ratio=1.0):
 		mu, sigma, number_of_instance = 0.5, 0.15, instance.shape[0]
-		bag_size = int(round(0.2 + 0.8 * (np.random.normal(mu, sigma, 1) * number_of_instance)[0]))
+		bag_size = 0
+		while bag_size <= 0 or bag_size > number_of_instance:
+			bag_size = int(round(0.2 + 0.8 * (np.random.normal(mu, sigma, 1) * number_of_instance)[0]))
 		ran_idx = np.random.randint(number_of_instance, size = bag_size)
 		return instance[ran_idx], label[ran_idx]
 
@@ -23,6 +25,7 @@ class Bag:
 			accuracy = binaryEvaluation(np.ravel(result), np.ravel(y))
 			# print('accuracy:' + str(accuracy))
 			if accuracy > 0.5:
+				print('Weak trainer accuracy:'+str(accuracy))
 				trainers.append(trainer)
 		return trainers
 
@@ -55,6 +58,7 @@ class Bag:
 			accuracy = multiclassEvaluation(result, y)
 			# print('accuracy:' + str(accuracy))
 			if accuracy > 0.5:
+				print('Weak trainer accuracy:'+str(accuracy))
 				trainers.append(trainer)
 		return trainers
 
@@ -64,7 +68,10 @@ class Bag:
 		result = np.empty([num_of_instance,k], dtype=object)
 		res_list = []
 		for trainer in trainers:
-			res_list.append(trainer.predict(x))
+			result_of_one_trainers = trainer.predict(x)
+			#accuracy = multiclassEvaluation(result_of_one_trainers, y)
+			#print('Weak multiclass trainer:' + str(accuracy))
+			res_list.append(result_of_one_trainers)
 
 		for i in range(num_of_instance):
 			country_score = {}

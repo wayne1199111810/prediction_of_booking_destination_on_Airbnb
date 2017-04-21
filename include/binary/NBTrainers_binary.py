@@ -12,6 +12,7 @@ class NBTrainers_binary:
 		cv = crossValidation.CV(k, instance, label)
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
+
 			# Y_train = self.convertUStoBinary(Y_train)
 			# Y_test = self.convertUStoBinary(Y_test)
 			# Y_train = np.ravel(Y_train)

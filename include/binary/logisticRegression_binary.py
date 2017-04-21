@@ -12,6 +12,7 @@ class logisticRegression_binary:
 		cv = crossValidation.CV(k, instance, label)
 		for i in range(k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
+
 			trainer = linear_model.LogisticRegression(C=regulation_strength)
 			trainer.fit(X_train, Y_train)
 			result = trainer.predict(X_valid)

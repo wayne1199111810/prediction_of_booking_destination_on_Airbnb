@@ -1,0 +1,19 @@
+Weak binary trainer:
+0.48091
+0.55725
+0.56296
+0.58518
+0.64023
+
+Bagging:
+0.60740
+
+Up-Sampling:
+0.6413
+
+-------------------------
+
+Weak multiclass trainer:
+
+Bagging:
+0.56

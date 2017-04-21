@@ -19,10 +19,14 @@ class binaryClassifier:
 		score = 0
 		for i in range(cv.k):
 			X_train, Y_train, X_valid, Y_valid = cv.iteration(i)
+
 			Y_valid = np.ravel(pp.convertUStoBinary(Y_valid))
 			Y_train = np.ravel(pp.convertUStoBinary(Y_train))
 
-			bTrainers = Bag.bagOfBinaryTrainers(X_train, Y_train, self.bag_size, cv.k * 4)
+			X_train, Y_train = upSampling(X_train, Y_train)
+			X_valid, Y_valid = upSampling(X_valid, Y_valid)
+
+			bTrainers = Bag.bagOfBinaryTrainers(X_train, Y_train, self.bag_size, cv.k * 2)
 			result = Bag.predictFromBinaryTrainers(X_valid, bTrainers)
 			accuracy = binaryEvaluation(np.ravel(result), Y_valid)
 			if accuracy > score:

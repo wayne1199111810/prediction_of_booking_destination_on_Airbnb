@@ -14,24 +14,7 @@ import math
 
 #createNewTrainingFileWithSize(50000)
 
-
-k = 3
-data = cv.CV(k)
-X_train, Y_train, X_valid, Y_valid = data.iteration(2)
-
-
-trainer1 = mt.multiclass_trainer()
-trainer1.train(X_train, Y_train, 3)
-#result1 = trainer1.predict(X_valid)
-
-
-trainer2 = mt.multiclass_trainer()
-trainer2.train(X_train, Y_train, 3)
-#result2 = trainer2.predict(X_valid)
-
-trainers = [trainer1, trainer2]
-x = X_valid
-
+createNewTrainingFileWithSize(3000)
 
 
 

@@ -6,7 +6,7 @@ from include import preProcessing as pp
 from include.Bag import *
 from include.utility import *
 
-class MultiClassifier:
+class multiClassifier:
 	def __init__(self, bag_size = 9):
 		self.mTrainers = []
 		self.bag_size = bag_size
@@ -18,7 +18,7 @@ class MultiClassifier:
 			# Y_valid = np.ravel(pp.convertUStoBinary(Y_valid))
 			# Y_train = np.ravel(pp.convertUStoBinary(Y_train))
 
-			mTrainers = Bag.bagOfMultiTrainers(X_train, Y_train, self.bag_size, cv.k * 4)
+			mTrainers = Bag.bagOfMultiTrainers(X_train, Y_train, self.bag_size, cv.k * 2)
 			result = Bag.predictFromMultiTrainers(X_valid, mTrainers)
 			accuracy = multiclassEvaluation(result, Y_valid)
 			if accuracy > score:

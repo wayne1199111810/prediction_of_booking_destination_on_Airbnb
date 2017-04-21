@@ -1,10 +1,11 @@
 import numpy as np
 import include.preProcessing as pp
 import math
+import random
 
 def binaryEvaluation(result, Y_test):
 	# print(str(result.shape) + ', ' + str(Y_test.shape))
-	assert result.shape == Y_test.shape
+	#assert result.shape == Y_test.shape
 	num = len(result)
 	score = 0
 	for i in range(num):
