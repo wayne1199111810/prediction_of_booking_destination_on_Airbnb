@@ -50,6 +50,3 @@ if __name__ == "__main__":
 	result_b.dump('result_b.dat')
 	result_m.dump('result_m.dat')
 	print(score)
-
-
-
